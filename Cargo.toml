@@ -1,0 +1,13 @@
+[package]
+name = "factory-flash"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.81"
+clap = { version = "4.5.4", features = ["derive"] }
+object = { version = "0.34.0", features = ["build"] }
+serde = { version = "1.0.197", features = ["derive"] }
+serde_json = "1.0.115"
+svd-parser = "0.14.5"
+zip = "0.6.6"
