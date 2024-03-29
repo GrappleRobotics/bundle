@@ -1,6 +1,6 @@
 {
   "pattern": "^STM32G431.*$",
-  "svd": "svd/stm32g4/STM32G431.svd",
+  "svd": "stm32g4/STM32G431.svd",
   "flash": {
     "unlock_key": [
       "0x45670123",
