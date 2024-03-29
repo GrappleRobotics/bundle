@@ -9,6 +9,8 @@ readme = "README.md"
 authors = ["Jaci Brunning"]
 license = "MIT"
 
+exclude = ["grapple-bundle-lib/**/*"]
+
 [dependencies]
 anyhow = "1.0.81"
 clap = { version = "4.5.4", features = ["derive"] }
