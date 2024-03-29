@@ -1,7 +1,13 @@
 [package]
-name = "grapple-factory-flash"
+name = "grapple-bundle"
 version = "0.1.0"
 edition = "2021"
+description = "Grapple's Embedded Firmware and Bootloader Bundler and Flasher utility"
+documentation = "https://docs.rs/grapple-bundle"
+repository = "https://github.com/GrappleRobotics/bundle"
+readme = "README.md"
+authors = ["Jaci Brunning"]
+license = "MIT"
 
 [dependencies]
 anyhow = "1.0.81"
@@ -9,7 +15,7 @@ clap = { version = "4.5.4", features = ["derive"] }
 object = { version = "0.34.0", features = ["build"] }
 probe-rs = "0.23.0"
 serde = { version = "1.0.197", features = ["derive"] }
-grapple-bundle = { version = "~0.1.0", path = "grapple-bundle" }
+grapple-bundle-lib = { version = "~0.1.0", path = "grapple-bundle-lib" }
 serde_json = "1.0.115"
 svd-parser = "0.14.5"
 zip = "0.6.6"

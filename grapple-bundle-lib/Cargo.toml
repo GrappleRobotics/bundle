@@ -1,0 +1,15 @@
+[package]
+name = "grapple-bundle"
+version = "0.1.0"
+edition = "2021"
+description = "Grapple's Embedded Firmware and Bootloader Bundler and Flasher utility (library)"
+documentation = "https://docs.rs/grapple-bundle-lib"
+repository = "https://github.com/GrappleRobotics/bundle"
+readme = "README.md"
+authors = ["Jaci Brunning"]
+license = "MIT"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = "1.0.197"

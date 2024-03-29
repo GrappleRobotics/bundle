@@ -775,7 +775,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "grapple-factory-flash"
+name = "grapple-bundle-tool"
 version = "0.1.0"
 dependencies = [
  "anyhow",
