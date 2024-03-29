@@ -130,6 +130,8 @@ pub enum FlashAction {
   SetField {
     path: String,
     value: u32,
+    #[serde(default)]
+    infallible: bool
   },
 }
 
@@ -174,10 +176,14 @@ impl FlashAction {
 
         println!("... Done!");
       },
-      FlashAction::SetField { path, value } => {
+      FlashAction::SetField { path, value, infallible } => {
         println!("[x] SETTING FIELD {}", path);
         let field = get_svd_field(path, svd)?;
-        set_svd_field(&mut core, field, *value)?;
+        if *infallible {
+          set_svd_field(&mut core, field, *value).ok();
+        } else {
+          set_svd_field(&mut core, field, *value)?;
+        }
       },
     }
     Ok(())
