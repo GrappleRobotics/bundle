@@ -689,26 +689,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "factory-flash"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "clap",
- "grapple-bundle",
- "human_bytes",
- "indicatif",
- "lazy_static",
- "object 0.34.0",
- "probe-rs",
- "regex",
- "rust-embed",
- "serde",
- "serde_json",
- "svd-parser",
- "zip",
-]
-
-[[package]]
 name = "fallible-iterator"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -792,6 +772,26 @@ name = "grapple-bundle"
 version = "0.1.0"
 dependencies = [
  "serde",
+]
+
+[[package]]
+name = "grapple-factory-flash"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "grapple-bundle",
+ "human_bytes",
+ "indicatif",
+ "lazy_static",
+ "object 0.34.0",
+ "probe-rs",
+ "regex",
+ "rust-embed",
+ "serde",
+ "serde_json",
+ "svd-parser",
+ "zip",
 ]
 
 [[package]]
