@@ -771,16 +771,9 @@ dependencies = [
 name = "grapple-bundle"
 version = "0.1.0"
 dependencies = [
- "serde",
-]
-
-[[package]]
-name = "grapple-bundle-tool"
-version = "0.1.0"
-dependencies = [
  "anyhow",
  "clap",
- "grapple-bundle",
+ "grapple-bundle-lib",
  "human_bytes",
  "indicatif",
  "lazy_static",
@@ -792,6 +785,13 @@ dependencies = [
  "serde_json",
  "svd-parser",
  "zip",
+]
+
+[[package]]
+name = "grapple-bundle-lib"
+version = "0.1.0"
+dependencies = [
+ "serde",
 ]
 
 [[package]]
