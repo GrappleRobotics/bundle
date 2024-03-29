@@ -51,7 +51,7 @@ lazy_static::lazy_static! {
       let resource = Resources::get(&resource).unwrap();
       let algo: Algo = serde_json::from_slice(&resource.data[..]).unwrap();
       let mut s = String::new();
-      zip.by_name(&algo.svd).unwrap().read_to_string(&mut s).unwrap();
+      zip.by_name(&format!("cmsis-svd-stm32-main/{}", algo.svd)).unwrap().read_to_string(&mut s).unwrap();
       let svd = svd_parser::parse(&s).unwrap();
       m.push((regex::Regex::new(&algo.pattern).unwrap(), algo, svd));
     }
