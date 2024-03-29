@@ -1,4 +1,4 @@
-use std::{collections::HashMap, io::Read};
+use std::{collections::HashMap, fs::File, io::Read};
 
 use rust_embed::RustEmbed;
 use serde::Deserialize;
@@ -32,8 +32,21 @@ pub struct Algo {
 lazy_static::lazy_static! {
   pub static ref ALGOS: Vec<(regex::Regex, Algo, svd_parser::svd::Device)> = {
     let mut m = Vec::new();
-    let svd_resource = Resources::get("svd.zip").unwrap();
-    let mut zip = ZipArchive::new(std::io::Cursor::new(&svd_resource.data[..])).unwrap();
+
+    let svd_path_parent = home::home_dir().expect("Couldn't get home directory").join(".grapple").join("bundle");
+    let svd_path = svd_path_parent.join("svd.zip");
+
+    if !svd_path.exists() {
+      println!("[x] DOWNLOADING SVDs");
+      let mut resp = reqwest::blocking::get("https://github.com/modm-io/cmsis-svd-stm32/archive/refs/heads/main.zip").unwrap();
+      std::fs::create_dir_all(svd_path_parent).unwrap();
+      let mut f = std::fs::File::create(&svd_path).unwrap();
+      std::io::copy(&mut resp, &mut f).unwrap();
+      println!("...Done");
+    }
+
+    let svd_zip_file = File::open(svd_path).unwrap();
+    let mut zip = ZipArchive::new(svd_zip_file).unwrap();
     for resource in Resources::iter().filter(|x| x.starts_with("algo/")) {
       let resource = Resources::get(&resource).unwrap();
       let algo: Algo = serde_json::from_slice(&resource.data[..]).unwrap();

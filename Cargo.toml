@@ -26,3 +26,5 @@ lazy_static = "1.4.0"
 regex = "1.10.4"
 human_bytes = "0.4.3"
 indicatif = "0.17.8"
+reqwest = { version = "0.11.23", features = ["blocking"] }
+home = "0.5.9"
