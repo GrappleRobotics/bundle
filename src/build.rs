@@ -1,9 +1,8 @@
 use std::{fs::File, io::{Read, Seek, Write}, path::Path};
 
+use grapple_bundle::Index;
 use object::{Object, ObjectSection, ObjectSegment};
 use zip::{write::FileOptions, ZipWriter};
-
-use crate::types::Index;
 
 fn filename(path: &Path) -> anyhow::Result<String> {
   path.file_name().map(|x| x.to_string_lossy().to_string()).ok_or(anyhow::anyhow!("No file name!"))
@@ -104,17 +103,18 @@ fn write_file_to_zip<T: Write + Seek>(zip: &mut ZipWriter<T>, file: &Path) -> an
   Ok(())
 }
 
-pub fn build_bundle(output: &Path, firmware: &Path, bootloader: &Path, svd: &Path, config: &Path) -> anyhow::Result<()> {
-  let file = File::create(output).unwrap();
+pub fn build_bundle(output: &Path, firmware: &Path, bootloader: &Path, config: &Path, lasercan_rev1_bootloader_check: bool) -> anyhow::Result<()> {
+  let file = File::create(output)?;
   let mut zip = ZipWriter::new(file);
 
   write_file_to_zip(&mut zip, firmware)?;
   write_file_to_zip(&mut zip, bootloader)?;
-  write_file_to_zip(&mut zip, svd)?;
   write_file_to_zip(&mut zip, config)?;
   
   let firmware_bytes = std::fs::read(firmware)?;
   let bootloader_bytes = std::fs::read(bootloader)?;
+
+  // TODO: LaserCAN Check
 
   let (version, new_elf) = gen_firmware_update_elf(&firmware_bytes)?;
   let update_elf_name = format!("{}-{}-update.elf", &filename(firmware)?, version);
@@ -137,8 +137,9 @@ pub fn build_bundle(output: &Path, firmware: &Path, bootloader: &Path, svd: &Pat
     firmware_update_bin: update_bin_name,
     bootloader: filename(bootloader)?,
     bootloader_update_bin: bootloader_update_bin_name,
-    svd: filename(svd)?,
     config: filename(config)?,
+    firmware_version: version,
+    bootloader_version: bootloader_version,
   };
   
   let idx_str = serde_json::to_string(&idx)?;
