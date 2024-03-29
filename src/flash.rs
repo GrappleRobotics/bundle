@@ -1,6 +1,6 @@
 use std::{fs::File, io::Read, path::Path, time::Duration};
 
-use grapple_bundle::Index;
+use grapple_bundle_lib::Index;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use probe_rs::{flashing::{DownloadOptions, FlashProgress, ProgressEvent}, probe::list::Lister, MemoryInterface, Permissions, Session};
 use serde::Deserialize;

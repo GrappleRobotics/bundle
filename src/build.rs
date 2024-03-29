@@ -1,6 +1,6 @@
 use std::{fs::File, io::{Read, Seek, Write}, path::Path};
 
-use grapple_bundle::Index;
+use grapple_bundle_lib::Index;
 use object::{Object, ObjectSection, ObjectSegment};
 use zip::{write::FileOptions, ZipWriter};
 
