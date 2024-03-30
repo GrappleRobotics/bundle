@@ -1,6 +1,6 @@
 [package]
 name = "grapple-bundle"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "Grapple's Embedded Firmware and Bootloader Bundler and Flasher utility"
 documentation = "https://docs.rs/grapple-bundle"
@@ -14,7 +14,7 @@ exclude = ["grapple-bundle-lib/**/*"]
 [dependencies]
 anyhow = "1.0.81"
 clap = { version = "4.5.4", features = ["derive"] }
-object = { version = "0.34.0", features = ["build"] }
+object = { version = "0.34.0", git = "git@github.com:JaciBrunning/object.git", branch = "fix-elf-misalignment", features = ["build"] }
 probe-rs = "0.23.0"
 serde = { version = "1.0.197", features = ["derive"] }
 grapple-bundle-lib = { version = "~0.1.0", path = "grapple-bundle-lib" }
