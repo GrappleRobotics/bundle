@@ -850,7 +850,7 @@ dependencies = [
 
 [[package]]
 name = "grapple-bundle"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "anyhow",
  "clap",
@@ -1445,8 +1445,7 @@ dependencies = [
 [[package]]
 name = "object"
 version = "0.34.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d7090bae93f8585aad99e595b7073c5de9ba89fbd6b4e9f0cdd7a10177273ac8"
+source = "git+https://github.com/JaciBrunning/object.git?branch=fix-elf-misalignment#ddff49c6980c9a50c7c0ab52e9cd062c9505ea84"
 dependencies = [
  "crc32fast",
  "flate2",
