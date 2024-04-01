@@ -1,0 +1,19 @@
+{
+  "pattern": "^STM32F103.*$",
+  "svd": "stm32f1/STM32F103.svd",
+  "flash": {
+    "unlock_key": [
+      "0x45670123",
+      "0xCDEF89AB"
+    ],
+    "key_path": "FLASH/KEYR/KEYR",
+    "lock_path": "FLASH/CR/LOCK",
+    "option": {
+      "unlock_key": [
+        "0x08192A3B",
+        "0x4C5D6E7F"
+      ],
+      "key_path": "FLASH/OPTKEYR/OPTKEYR"
+    }
+  }
+}
