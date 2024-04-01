@@ -123,6 +123,17 @@ pub fn build_bundle(output: &Path, firmware: &Path, bootloader: &Path, config: &
   
   let (version, firmware_bin) = convert_to_bin(&new_elf[..])?;
   let update_bin_name = format!("{}-{}-update.grplfw", &filename(firmware)?, version);
+
+  if lasercan_rev1_bootloader_check {
+    let mut i = 0;
+    while i < firmware_bin.len() {
+      if firmware_bin[i] == 0xFF {
+        anyhow::bail!("Invalid Firmware File - Incompatible with Bootloader 0.1.0 (index=0x{:x})", i);
+      }
+      i += 1024;
+    }
+  }
+
   zip.start_file(&update_bin_name, FileOptions::default().unix_permissions(0o755))?;
   zip.write_all(&firmware_bin[..])?;
 
