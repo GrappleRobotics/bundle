@@ -132,6 +132,7 @@ pub fn build_bundle(output: &Path, firmware: &Path, bootloader: &Path, config: &
       }
       i += 1024;
     }
+    println!("LaserCAN Bootloader 0.1.0 compatible!");
   }
 
   zip.start_file(&update_bin_name, FileOptions::default().unix_permissions(0o755))?;
