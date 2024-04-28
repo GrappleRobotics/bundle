@@ -81,7 +81,7 @@ fn convert_to_bin(data: &[u8]) -> anyhow::Result<(String, Vec<u8>)> {
         },
         Some(x) => {
           let pad = segment.address() - x;
-          out_data.extend(vec![0x00; pad as usize]);
+          out_data.extend(vec![0xFF; pad as usize]);
           out_data.extend_from_slice(data);
         }
       }
