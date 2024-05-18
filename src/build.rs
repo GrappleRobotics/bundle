@@ -114,8 +114,6 @@ pub fn build_bundle(output: &Path, firmware: &Path, bootloader: &Path, config: &
   let firmware_bytes = std::fs::read(firmware)?;
   let bootloader_bytes = std::fs::read(bootloader)?;
 
-  // TODO: LaserCAN Check
-
   let (version, new_elf) = gen_firmware_update_elf(&firmware_bytes)?;
   let update_elf_name = format!("{}-{}-update.elf", &filename(firmware)?, version);
   zip.start_file(&update_elf_name, FileOptions::default().unix_permissions(0o755))?;

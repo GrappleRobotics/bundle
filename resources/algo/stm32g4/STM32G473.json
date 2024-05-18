@@ -1,0 +1,19 @@
+{
+  "pattern": "^STM32G473.*$",
+  "svd": "stm32g4/STM32G473.svd",
+  "flash": {
+    "unlock_key": [
+      "0x45670123",
+      "0xCDEF89AB"
+    ],
+    "key_path": "FLASH/KEYR/KEYR",
+    "lock_path": "FLASH/CR/LOCK",
+    "option": {
+      "unlock_key": [
+        "0x08192A3B",
+        "0x4C5D6E7F"
+      ],
+      "key_path": "FLASH/OPTKEYR/OPTKEYR"
+    }
+  }
+}
