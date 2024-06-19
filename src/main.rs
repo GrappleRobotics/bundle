@@ -36,6 +36,8 @@ enum Commands {
     bundle: PathBuf,
     #[arg(short, long)]
     chip: String,
+    #[arg(short, long)]
+    jtag: bool
   }
 }
 
@@ -46,8 +48,8 @@ fn main() {
     Commands::Build { output, firmware, bootloader, config, lasercan_rev1_bootloader_check } => {
       build_bundle(output, firmware, bootloader, config, *lasercan_rev1_bootloader_check).unwrap();
     },
-    Commands::Flash { bundle, chip } => {
-      flash_bundle(bundle, chip).unwrap();
+    Commands::Flash { bundle, chip, jtag } => {
+      flash_bundle(bundle, chip, *jtag).unwrap();
     },
   }
 }

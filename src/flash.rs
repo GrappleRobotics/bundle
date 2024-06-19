@@ -199,7 +199,7 @@ pub struct FlashConfig {
 
 
 
-pub fn flash_bundle(bundle: &Path, chip: &str) -> anyhow::Result<()> {
+pub fn flash_bundle(bundle: &Path, chip: &str, jtag: bool) -> anyhow::Result<()> {
   // Step 1 - open bundle, read index, read config
   let file = File::open(bundle)?;
   let mut archive = zip::ZipArchive::new(file)?;
@@ -218,7 +218,12 @@ pub fn flash_bundle(bundle: &Path, chip: &str) -> anyhow::Result<()> {
 
   // Step 2 - open probe
   let lister = Lister::new();
-  let probe = lister.list_all().first().ok_or(anyhow::anyhow!("No probes found!"))?.open(&lister)?;
+  let mut probe = lister.list_all().first().ok_or(anyhow::anyhow!("No probes found!"))?.open(&lister)?;
+  if jtag {
+    probe.select_protocol(probe_rs::probe::WireProtocol::Jtag)?;
+  } else {
+    probe.select_protocol(probe_rs::probe::WireProtocol::Swd)?;
+  }
 
   let mut session = probe.attach(chip, Permissions::default())?;
 
