@@ -199,7 +199,7 @@ pub struct FlashConfig {
 
 
 
-pub fn flash_bundle(bundle: &Path, chip: &str, jtag: bool) -> anyhow::Result<()> {
+pub fn flash_bundle(bundle: &Path, chip: &str, jtag: bool, connect_under_reset: bool) -> anyhow::Result<()> {
   // Step 1 - open bundle, read index, read config
   let file = File::open(bundle)?;
   let mut archive = zip::ZipArchive::new(file)?;
@@ -225,7 +225,10 @@ pub fn flash_bundle(bundle: &Path, chip: &str, jtag: bool) -> anyhow::Result<()>
     probe.select_protocol(probe_rs::probe::WireProtocol::Swd)?;
   }
 
-  let mut session = probe.attach(chip, Permissions::default())?;
+  let mut session = match connect_under_reset {
+    true => probe.attach_under_reset(chip, Permissions::default())?,
+    false => probe.attach(chip, Permissions::default())?,
+  };
 
   // Step 3 - run routine
   for action in config.procedure.iter() {

@@ -37,7 +37,9 @@ enum Commands {
     #[arg(short, long)]
     chip: String,
     #[arg(short, long)]
-    jtag: bool
+    jtag: bool,
+    #[arg(long)]
+    connect_under_reset: bool
   }
 }
 
@@ -48,8 +50,8 @@ fn main() {
     Commands::Build { output, firmware, bootloader, config, lasercan_rev1_bootloader_check } => {
       build_bundle(output, firmware, bootloader, config, *lasercan_rev1_bootloader_check).unwrap();
     },
-    Commands::Flash { bundle, chip, jtag } => {
-      flash_bundle(bundle, chip, *jtag).unwrap();
+    Commands::Flash { bundle, chip, jtag, connect_under_reset } => {
+      flash_bundle(bundle, chip, *jtag, *connect_under_reset).unwrap();
     },
   }
 }
