@@ -84,7 +84,7 @@ pub fn flash<T: Read>(session: &mut Session, read: &mut T) -> anyhow::Result<()>
     ProgressEvent::SectorErased { size, .. } => {
         erase_progress.inc(size);
     }
-    ProgressEvent::PageFilled { size, .. } => { }
+    ProgressEvent::PageFilled {  .. } => { }
     ProgressEvent::FailedErasing => {
         erase_progress.abandon();
         program_progress.abandon();

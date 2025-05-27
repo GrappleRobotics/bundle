@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fs::File, io::Read};
+use std::{fs::File, io::Read};
 
 use rust_embed::RustEmbed;
 use serde::Deserialize;
