@@ -6,14 +6,14 @@
       "0x45670123",
       "0xCDEF89AB"
     ],
-    "key_path": "FLASH/KEYR/KEYR",
-    "lock_path": "FLASH/CR/LOCK",
+    "key_path": "FLASH/FLASH_KEYR/KEYR",
+    "lock_path": "FLASH/FLASH_CR/LOCK",
     "option": {
       "unlock_key": [
         "0x08192A3B",
         "0x4C5D6E7F"
       ],
-      "key_path": "FLASH/OPTKEYR/OPTKEYR"
+      "key_path": "FLASH/FLASH_OPTKEYR/OPTKEYR"
     }
   }
 }
