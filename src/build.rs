@@ -72,20 +72,24 @@ fn convert_to_bin(data: &[u8]) -> anyhow::Result<(String, Vec<u8>)> {
   let mut offset = None;
 
   for segment in obj.segments() {
-    let data = segment.data()?;
-    if !data.is_empty() {
-      // println!("{:x?}", segment.address());
-      match offset {
-        None => {
-          out_data.extend_from_slice(data);
-        },
-        Some(x) => {
-          let pad = segment.address() - x;
-          out_data.extend(vec![0xFF; pad as usize]);
-          out_data.extend_from_slice(data);
+    // Exclude RAM etc - this isn't the best metric and should have a better filter to only capture flash based on the MCU
+    // memory layout
+    if segment.address() < 0x2000_0000 {
+      let data = segment.data()?;
+      if !data.is_empty() {
+        // println!("{:x?}", segment.address());
+        match offset {
+          None => {
+            out_data.extend_from_slice(data);
+          },
+          Some(x) => {
+            let pad = segment.address() - x;
+            out_data.extend(vec![0xFF; pad as usize]);
+            out_data.extend_from_slice(data);
+          }
         }
+        offset = Some(segment.address() + data.len() as u64);
       }
-      offset = Some(segment.address() + data.len() as u64);
     }
   }
 
