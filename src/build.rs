@@ -27,7 +27,7 @@ fn read_version(obj: &object::File<'_>) -> anyhow::Result<String> {
         },
       };
       for section in obj.sections() {
-        if section.address() <= addr.into() && (section.address() + section.data()?.len() as u64) > (addr + str_len) as u64 {
+        if section.address() <= addr as u64 && (section.address() + section.data()?.len() as u64) > (addr + str_len) as u64 {
           let offset = addr as usize - section.address() as usize;
           let version_str = &section.data()?[offset..offset+str_len as usize];
           
